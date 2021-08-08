@@ -1,12 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "index.css";
-import { MainView } from "view/Main";
 import reportWebVitals from "reportWebVitals";
+
+import { HXSplash } from "components";
+import { MainView } from "view/Main";
+
+import "index.css";
+
+const App = () => {
+  return (
+    <HXSplash>
+      <MainView />
+    </HXSplash>
+  );
+};
 
 ReactDOM.render(
   <React.StrictMode>
-    <MainView />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
