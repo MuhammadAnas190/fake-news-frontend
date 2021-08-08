@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import reportWebVitals from "reportWebVitals";
 
 import { HXSplash } from "components";
-import { MainView } from "view/Main";
+import MainView from "view/Main";
 
 import "index.css";
 
