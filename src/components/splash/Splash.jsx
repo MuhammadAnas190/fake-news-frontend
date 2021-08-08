@@ -13,7 +13,7 @@ export const HXSplash = ({ children }) => {
         setSplashTime(true);
       }, 1500);
     }
-  }, []);
+  }, [splashTime]);
 
   return (
     <>
