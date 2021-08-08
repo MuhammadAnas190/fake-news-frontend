@@ -1,5 +1,9 @@
-import { Layout } from "antd";
-import { HXButton } from "components/index";
+import { Layout, Row, Col } from "antd";
+
+import { HXImage } from "components/index";
+
+import Logo from "assets/images/logo.png";
+
 import "view/main.css";
 
 const { Header, Content } = Layout;
@@ -15,11 +19,16 @@ const { Header, Content } = Layout;
 export const MainView = (props) => {
   return (
     <Layout className="main-view">
-      <Header>{/* Here we will be applying the navigation and logo */}</Header>
+      <Header>
+        <Row justify="center" align="middle" className="hx-header-row">
+          <Col>
+            <HXImage src={Logo} alt="The Hoax" width={280} />
+          </Col>
+        </Row>
+      </Header>
       <Content>
         {/* Here we will be applying using the components */}
-
-        <HXButton>This is an antd button</HXButton>
+        {/* <HXButton>This is an antd button</HXButton> */}
       </Content>
     </Layout>
   );

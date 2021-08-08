@@ -10,4 +10,8 @@ export const HXButton = ({ className = "", ...props }) => {
 // Setting prop types
 HXButton.propTypes = {
   onClick: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
+  shape: PropTypes.string,
+  size: PropTypes.string,
+  icon: PropTypes.node,
 };
