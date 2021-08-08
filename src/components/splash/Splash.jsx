@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import { HXImage } from "components";
 import SplashImg from "assets/images/splash.png";
+import "./style.css";
 
 export const HXSplash = ({ children }) => {
   const [splashTime, setSplashTime] = useState(false);

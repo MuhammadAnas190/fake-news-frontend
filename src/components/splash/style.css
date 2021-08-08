@@ -1,0 +1,21 @@
+.hx-splash-wrapper {
+  overflow: hidden;
+}
+.hx-splash-wrapper img {
+  animation: zoom 2.5s ease-in-out;
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(1);
+    -webkit-transition: opacity 3s ease-in-out;
+    -moz-transition: opacity 3s ease-in-out;
+    -ms-transition: opacity 3s ease-in-out;
+    -o-transition: opacity 3s ease-in-out;
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.75);
+    opacity: 0;
+  }
+}
