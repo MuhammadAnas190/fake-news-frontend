@@ -64,6 +64,7 @@ const MainView = (props) => {
                     placeholder="News here"
                     onChange={OnChangeHXTextArea}
                     rows={4}
+                    maxLength={3500}
                   />
                 </Row>
                 <HXButton className="hx-button-analyze" onClick={onClickSubmit}>
