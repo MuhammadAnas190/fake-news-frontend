@@ -10,6 +10,15 @@ import "view/main.css";
 const { Header, Content } = Layout;
 const { Title, Text } = Typography;
 
+/**
+ * We will be setting a basic layout for the web.
+ * Also we should be calling our actions from here
+ * and pass down the values through props (single responsibility)
+ *
+ * @todo make sure to not use "style" attribute. Create classes which should be inherited from parent class
+ * .main-view
+ */
+
 const MainView = (props) => {
   const [newsText, setnewsText] = useState("");
   const [result, setresult] = useState("");
