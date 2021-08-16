@@ -94,15 +94,20 @@ const MainView = (props) => {
                 <Row>
                   <Col>
                     {result.prediction === "Real" ? (
-                      <p style={{ color: "green", marginTop: "10px" }}>
+                      <Text 
+                        className="result-true"
+                        // style={{ color: "green", marginTop: "10px" }} Use this style in CSS
+                      > 
                         Its Real
-                      </p>
-                    ) : null}
-                    {result.prediction === "Fake" ? (
-                      <p style={{ color: "red", marginTop: "10px" }}>
+                      </Text>
+                    ) : result.prediction === "Fake" ? (
+                      <Text 
+                        className="result-false"
+                        // style={{ color: "red", marginTop: "10px" }}
+                      >
                         Its Fake
-                      </p>
-                    ) : null}
+                      </Text>
+                    ) : <Text>Umm! Something went wrong...</Text>}
                   </Col>
                 </Row>
               </Col>
