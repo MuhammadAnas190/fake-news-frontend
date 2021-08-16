@@ -6,7 +6,7 @@ import axios from "axios";
 
 // We need to set default config for axios
 axios.defaults.baseURL = "https://fake-news-detector-backend.herokuapp.com";
-axios.defaults.headers.post = { 
+axios.defaults.headers.post = {
   'Access-Control-Allow-Origin': '*',
   'accept': 'application/json',
   'Content-Type': 'application/json',
@@ -22,5 +22,6 @@ export async function fetchNewsResult(newsText) {
     return response.data;
   } catch (error) {
     console.error(error);
+    return { 'prediction': "error" }
   }
 }

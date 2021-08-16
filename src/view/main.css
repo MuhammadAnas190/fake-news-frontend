@@ -13,3 +13,16 @@
   min-height: 75vh;
   padding: 50px 0;
 }
+
+.main-view .hx-button-analyze {
+  float: right;
+  margin-top: 10px;
+}
+.main-view .result-real {
+  color: green;
+  margin-top: 10px;
+}
+.main-view .result-fake {
+  color: red;
+  margin-top: 10px;
+}

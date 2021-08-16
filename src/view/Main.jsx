@@ -10,17 +10,6 @@ import "view/main.css";
 const { Header, Content } = Layout;
 const { Title, Text } = Typography;
 
-/**
- * @authors
- * MuhammadAnas190
- * Subhan Ahmed
- * We will be setting a basic layout for the web.
- * Also we should be calling our actions from here
- * and pass down the values through props (single responsibility)
- *
- * @todo make sure to not use "style" attribute. Create classes which should be inherited from parent class
- * .main-view
- */
 const MainView = (props) => {
   const [newsText, setnewsText] = useState("");
   const [result, setresult] = useState("");
@@ -32,25 +21,18 @@ const MainView = (props) => {
   const onClickSubmit = async () => {
     // removing links and special symbols from th news text
     let temp = newsText.toLowerCase();
-    // temp = temp.replace("/[https?://S+|www.S+]/g", "");
     temp = temp.replace(/[\\W]/gm, " ");
-    // temp = temp.replace("/[\n]/g", "");
-    // temp = temp.replace(/[+]/g, " ");
-    // temp = temp.replace(/[^]/g, "");
-    // temp = temp.replace(/[$]/g, "");
-    // temp =temp.replace(/[^\x20-\x7E]/gmi, "")
     temp = temp.replace(/(\r\n|\n|\r)/gm, " ").trim();
     temp = temp.replace(/[â€™]/g, "");
     temp = temp.replace(/[â€œ]/g, "");
     temp = temp.replace(/[]/g, "");
-    // temp = temp.replace(/[^a-zA-Z0-9]/g, '');
 
     console.log(temp);
     setnewsText(temp);
     if (newsText) {
       message.loading("Calculating news");
-      const tempr = await fetchNewsResult(newsText);
-      setresult(tempr);
+      const tempResult = await fetchNewsResult(newsText);
+      setresult(tempResult);
       console.log(result);
     }
   };
@@ -81,33 +63,19 @@ const MainView = (props) => {
                   <HXTextArea
                     placeholder="News here"
                     onChange={OnChangeHXTextArea}
-                    size="large"
-                    style={{ height: "150px" }}
+                    rows={4}
                   />
                 </Row>
-                <HXButton
-                  onClick={onClickSubmit}
-                  style={{ float: "right", marginTop: "10px" }}
-                >
+                <HXButton className="hx-button-analyze" onClick={onClickSubmit}>
                   Analyze
                 </HXButton>
                 <Row>
                   <Col>
                     {result.prediction === "Real" ? (
-                      <Text 
-                        className="result-true"
-                        // style={{ color: "green", marginTop: "10px" }} Use this style in CSS
-                      > 
-                        Its Real
-                      </Text>
+                      <Text className="result-real">Its Real</Text>
                     ) : result.prediction === "Fake" ? (
-                      <Text 
-                        className="result-false"
-                        // style={{ color: "red", marginTop: "10px" }}
-                      >
-                        Its Fake
-                      </Text>
-                    ) : <Text>Umm! Something went wrong...</Text>}
+                      <Text className="result-fake">Its Fake</Text>
+                    ) : null}
                   </Col>
                 </Row>
               </Col>
