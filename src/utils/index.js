@@ -19,8 +19,7 @@ export async function fetchNewsResult(newsText) {
     });
     console.log(response.data);
     message.success('Calculated Successfully')
-    const result = await response.data
-    return result;
+    return response.data;
   } catch (error) {
     console.error(error);
   }
