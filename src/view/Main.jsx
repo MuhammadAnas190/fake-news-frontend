@@ -21,11 +21,11 @@ const { Title, Text } = Typography;
 
 const MainView = (props) => {
   const [newsText, setnewsText] = useState("");
+  const [loading, setLoading] = useState(false);
   const [result, setresult] = useState("");
 
   const OnChangeHXTextArea = (e) => {
     setnewsText(e.target.value);
-    console.log(newsText);
   };
   const onClickSubmit = async () => {
     // removing links and special symbols from th news text
@@ -36,13 +36,13 @@ const MainView = (props) => {
     temp = temp.replace(/[â€œ]/g, "");
     temp = temp.replace(/[]/g, "");
 
-    console.log(temp);
     setnewsText(temp);
     if (newsText) {
       message.loading("Calculating news");
-      const tempResult = await fetchNewsResult(newsText);
-      setresult(tempResult);
-      console.log(result);
+      setLoading(true);
+      const response = await fetchNewsResult(newsText);
+      setLoading(false);
+      setresult(response);
     }
   };
   return (
@@ -59,7 +59,7 @@ const MainView = (props) => {
           <Col xs={24} lg={20}>
             {/* Here we will be applying using the components */}
             <Row gutter={10} justify="space-between">
-              <Col lg={12}>
+              <Col xs={24} lg={12}>
                 <Title>Fake News Detector</Title>
                 <Text>
                   Ever thought how we can find the fake articles/news that do
@@ -68,31 +68,40 @@ const MainView = (props) => {
                   is the correct article. We are using Tensorflow model through
                   which we will be finding out the fake news.
                 </Text>
-                <Row>
-                  <HXTextArea
-                    placeholder="News here"
-                    onChange={OnChangeHXTextArea}
-                    rows={4}
-                    maxLength={3500}
-                  />
-                </Row>
-                <HXButton className="hx-button-analyze" onClick={onClickSubmit}>
-                  Analyze
-                </HXButton>
-                <Row>
-                  <Col>
-                    {result.prediction === "Real" ? (
-                      <Text className="result-real">Its Real</Text>
-                    ) : result.prediction === "Fake" ? (
-                      <Text className="result-fake">Its Fake</Text>
-                    ) : null}
+                <Row align="middle" justify="end">
+                  <Col span={24}>
+                    <HXTextArea
+                      placeholder="It's time to find the actual news! Enter now..."
+                      onChange={OnChangeHXTextArea}
+                      rows={11}
+                      maxLength={3500}
+                    />
+                  </Col>
+                  <Col span={6}>
+                    <HXButton
+                      className="hx-button-analyze"
+                      block
+                      size="large"
+                      onClick={onClickSubmit}
+                    >
+                      Analyze
+                    </HXButton>
                   </Col>
                 </Row>
               </Col>
               <Col lg={12}>
                 <Row justify="center">
                   <Col>
-                    <HXImage src={FakeNews} alt="Fake News" />
+                    <HXImage src={FakeNews} alt="Fake News" loading={loading} />
+                  </Col>
+                </Row>
+                <Row gutter={20} justify="center" align="middle">
+                  <Col>
+                    {result.prediction === "Real" ? (
+                      <Text className="result-real">Its Real</Text>
+                    ) : result.prediction === "Fake" ? (
+                      <Text className="result-fake">Its Fake</Text>
+                    ) : null}
                   </Col>
                 </Row>
               </Col>

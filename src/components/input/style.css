@@ -1,1 +1,7 @@
 /* Here we will be overriding the default ant design styles */
+textarea.ant-input.hx-textarea {
+  border-radius: 10px;
+  border: none;
+  overflow: hidden;
+  margin: 30px 0 20px;
+}

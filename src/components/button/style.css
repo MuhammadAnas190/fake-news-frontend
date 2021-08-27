@@ -1,1 +1,7 @@
 /* Here we will be overriding the default ant design styles */
+button.ant-btn.hx-button {
+  border-radius: 10px;
+  background-color: #263238;
+  color: #ffffff;
+  height: 50px;
+}
