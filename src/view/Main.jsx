@@ -24,27 +24,28 @@ const MainView = (props) => {
   const [loading, setLoading] = useState(false);
   const [result, setresult] = useState("");
 
-  const OnChangeHXTextArea = (e) => {
-    setnewsText(e.target.value);
-  };
   const onClickSubmit = async () => {
-    // removing links and special symbols from th news text
-    let temp = newsText.toLowerCase();
-    temp = temp.replace(/[\\W]/gm, " ");
-    temp = temp.replace(/(\r\n|\n|\r)/gm, " ").trim();
-    temp = temp.replace(/[â€™]/g, "");
-    temp = temp.replace(/[â€œ]/g, "");
-    temp = temp.replace(/[]/g, "");
-
-    setnewsText(temp);
     if (newsText) {
-      message.loading("Calculating news");
+      // removing links and special symbols from th news text
+      // Allowing only white listed text from newsText.
+      const filteredNewsText = newsText.replace(/[^a-zA-Z0-9 ]/g, "");
+
+      message.loading("Calculating news...");
       setLoading(true);
-      const response = await fetchNewsResult(newsText);
+      setresult("");
+      try {
+        const response = await fetchNewsResult(filteredNewsText);
+        setresult(response.prediction.toLowerCase());
+        message.success("Woohoo your news is now calculated!");
+      } catch (e) {
+        message.error("Looks like something went wrong!");
+      }
       setLoading(false);
-      setresult(response);
+    } else {
+      message.error("Enter news first!");
     }
   };
+
   return (
     <Layout className="main-view">
       <Header>
@@ -72,17 +73,18 @@ const MainView = (props) => {
                   <Col span={24}>
                     <HXTextArea
                       placeholder="It's time to find the actual news! Enter now..."
-                      onChange={OnChangeHXTextArea}
+                      onChange={(e) => setnewsText(e.target.value)}
                       rows={11}
                       maxLength={3500}
                     />
                   </Col>
-                  <Col span={6}>
+                  <Col xs={12} lg={6}>
                     <HXButton
                       className="hx-button-analyze"
                       block
                       size="large"
                       onClick={onClickSubmit}
+                      loading={loading}
                     >
                       Analyze
                     </HXButton>
@@ -90,18 +92,22 @@ const MainView = (props) => {
                 </Row>
               </Col>
               <Col lg={12}>
-                <Row justify="center">
-                  <Col>
-                    <HXImage src={FakeNews} alt="Fake News" loading={loading} />
-                  </Col>
-                </Row>
                 <Row gutter={20} justify="center" align="middle">
                   <Col>
-                    {result.prediction === "Real" ? (
-                      <Text className="result-real">Its Real</Text>
-                    ) : result.prediction === "Fake" ? (
-                      <Text className="result-fake">Its Fake</Text>
+                    {result.includes("real") ? (
+                      <Title level={4} className="result-real">
+                        Its Real
+                      </Title>
+                    ) : result.includes("fake") ? (
+                      <Title level={4} className="result-fake">
+                        Its Fake
+                      </Title>
                     ) : null}
+                  </Col>
+                </Row>
+                <Row justify="center">
+                  <Col>
+                    <HXImage src={FakeNews} alt="Fake News" />
                   </Col>
                 </Row>
               </Col>
