@@ -15,10 +15,9 @@
   margin: 0 20px;
 }
 
-/* .main-view .hx-button-analyze {
-  float: right;
+.main-view .hx-button-analyze {
   margin-top: 10px;
-} */
+}
 .main-view .result-real {
   color: green;
   margin-top: 10px;

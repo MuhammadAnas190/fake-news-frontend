@@ -4,7 +4,7 @@
 import axios from "axios";
 
 // We need to set default config for axios
-axios.defaults.baseURL = "https://fake-news-detector-backend.herokuapp.com";
+axios.defaults.baseURL = "https://api-reality-check.herokuapp.com/";
 axios.defaults.headers.post = {
   "Access-Control-Allow-Origin": "*",
   accept: "application/json",

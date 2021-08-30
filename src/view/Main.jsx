@@ -20,9 +20,9 @@ const { Title, Text } = Typography;
  */
 
 const MainView = (props) => {
-  const [newsText, setnewsText] = useState("");
+  const [newsText, setNewsText] = useState("");
   const [loading, setLoading] = useState(false);
-  const [result, setresult] = useState("");
+  const [result, setResult] = useState("");
 
   const onClickSubmit = async () => {
     if (newsText) {
@@ -32,10 +32,12 @@ const MainView = (props) => {
 
       message.loading("Calculating news...");
       setLoading(true);
-      setresult("");
+      setResult("");
       try {
         const response = await fetchNewsResult(filteredNewsText);
-        setresult(response.prediction.toLowerCase());
+        console.log("response: ", response);
+        // const randomPredict = Math.random() > 0.5 ? "real" : "fake";
+        setResult(response.prediction.toLowerCase());
         message.success("Woohoo your news is now calculated!");
       } catch (e) {
         message.error("Looks like something went wrong!");
@@ -73,9 +75,10 @@ const MainView = (props) => {
                   <Col span={24}>
                     <HXTextArea
                       placeholder="It's time to find the actual news! Enter now..."
-                      onChange={(e) => setnewsText(e.target.value)}
+                      onChange={(e) => setNewsText(e.target.value)}
                       rows={11}
                       maxLength={3500}
+                      showCount
                     />
                   </Col>
                   <Col xs={12} lg={6}>
@@ -96,11 +99,11 @@ const MainView = (props) => {
                   <Col>
                     {result.includes("real") ? (
                       <Title level={4} className="result-real">
-                        Its Real
+                        Looks like this news is REAL
                       </Title>
                     ) : result.includes("fake") ? (
                       <Title level={4} className="result-fake">
-                        Its Fake
+                        Looks like this news is FAKE
                       </Title>
                     ) : null}
                   </Col>
