@@ -1,4 +1,4 @@
-<h1 align="center">The Hoax :newspaper_roll: - Web App</h1>
+<h1 align="center">Reality Check :newspaper_roll: - Web App</h1>
 <h3 align="center">A fake news App</h3>
 
 Ever thought how we can find the **fake articles/news** that do get spread in the world of internet very easily?
